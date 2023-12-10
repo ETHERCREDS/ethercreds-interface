@@ -30,12 +30,12 @@ const index = () => {
       <h2 className="text-white text-center mt-3">Profile Created!</h2>
 
       <div className="mx-auto flex justify-center items-center my-20 gap-10">
-        <button
+        {/* <button
           onClick={homepageHandler}
           className="bg-white/50 py-2 px-7 rounded-md"
         >
           Deploy NFT
-        </button>
+        </button> */}
         <button
           onClick={dashboardHandler}
           className="bg-white/50 py-2 px-7 rounded-md"
