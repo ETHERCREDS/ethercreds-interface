@@ -68,19 +68,22 @@ const router = useRouter();
 
         <div className="flex-[0.45] py-8">
           <h2 className="font-semibold text-4xl text-white mb-2">
-            Krishna R {receivedData.name}
+            {receivedData.name}
           </h2>
           <p className="text-gray-300 mb-6 text-xl">
             <span className="text-gray-100 font-semibold">#21232</span>
           </p>
           <p className="text-gray-400 text-2xl">
-            Xp Score - <span className="text-white">84/100</span>
+            Number of Commits - <span className="text-white">81</span>
           </p>
 
           <div>
-            {/* <h2 className="text-white font-bold text-xl mt-8">
-              Past Experience {receivedData.skillsets}
-            </h2> */}
+            <h2 className="text-white font-bold text-xl mt-8">
+              Number of Repos - 20
+            </h2>
+            <h3 className="text-white font-bold text-xl mt-8">
+              Github Oauth Access Token - {receivedData.token}
+            </h3>
 
             <div className="flex flex-wrap h-[18rem]">
               {/* {data.map((item) => (
@@ -112,10 +115,10 @@ const router = useRouter();
               QR Code{" "}
             </div> */}
             <div className="text-md py-2 w-[15rem] bg-gray-300 px-2 mb-2 rounded-md cursor-pointer">
-              Experience - {receivedData.name}
+              Experience - {receivedData.skillsets}
             </div>
             <div className="text-md py-2 w-[15rem] bg-gray-300 px-2 mb-2 rounded-md cursor-pointer">
-              Sign Out
+            <a href='/'>Sign Out</a> 
             </div>
             {/* <div className="text-md py-2 w-[15rem] bg-gray-300 px-2 mb-2 rounded-md cursor-pointer">
               Settings

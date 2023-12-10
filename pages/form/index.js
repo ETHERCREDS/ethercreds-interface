@@ -14,6 +14,8 @@ const index = () => {
   const nftStorageHttpService = new NftStorageHttpService();
 
   const router = useRouter();
+  const { code } = router.query;
+  
 
   const changeHandler = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -35,6 +37,7 @@ const index = () => {
     let enteredGithub = githubInputRef.current.value;
     let enteredTwitter = twitterInputRef.current.value;
     let enteredLinkedIn = linkedInInputRef.current.value;
+    let enteredCode = code
 
     if (!enteredAge || !enteredName || !enteredInterests || !enteredSkillsets) {
       return alert("Enter Proper details!");
@@ -44,12 +47,14 @@ const index = () => {
 
 
     let subBody = {
+      token: enteredCode,
       name: enteredName,
       age: enteredAge,
       interests: enteredInterests,
       skillsets: enteredSkillsets,
       twitter: enteredTwitter,
-      linkedin: enteredLinkedIn
+      linkedin: enteredLinkedIn,
+      code: enteredCode
     }
     // router.push("/profile");
     router.push(
