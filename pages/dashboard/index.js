@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Chat } from "@pushprotocol/uiweb";
 
 import {
@@ -34,13 +34,67 @@ const ListItem = ({ skill }) => {
 };
 
 const index = () => {
-  
+  const [userData, setUserData] = useState(null);
 const router = useRouter();
   const { data } = router.query;
   const receivedData = data ? JSON.parse(data) : null;
+  const [dataRep, setdataRep] = useState(20)
+  const [dataCom, setdataCom] = useState(81)
 
-  useEffect(()=>{
-    window.location.reload
+
+  useEffect(async ()=>{
+
+    const baseUrl = "https://api.github.com/graphql";
+
+    const query =`query {
+      viewer {
+        repositories(first: 100) {
+          totalCount
+          nodes {
+            defaultBranchRef {
+              target {
+                ... on Commit {
+                  history {
+                    totalCount
+                  }
+                }
+              }
+            }
+            pullRequests {
+              totalCount
+            }
+          }
+        }
+      }
+    }`
+
+const header = {
+  "Content-Type": "application/json",
+  Authentication: `Bearer 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`
+}
+
+
+try{
+
+   const response = await fetch(baseUrl, {
+    method: 'POST',
+    headers: header,
+    body: JSON.stringify({query})
+   });
+
+   const data = await response.json();
+   console.log(data)
+        setUserData(data.data.viewer);
+
+
+}catch (error) {
+  console.error('Error:', error);
+  // Handle errors, such as displaying an error message to the user
+}
+
+
+
+
   }, [])
 
   return (
@@ -68,21 +122,21 @@ const router = useRouter();
 
         <div className="flex-[0.45] py-8">
           <h2 className="font-semibold text-4xl text-white mb-2">
-            {receivedData.name}
+            {receivedData?.name}
           </h2>
           <p className="text-gray-300 mb-6 text-xl">
             <span className="text-gray-100 font-semibold">#21232</span>
           </p>
           <p className="text-gray-400 text-2xl">
-            Number of Commits - <span className="text-white">81</span>
+            Number of Commits - <span className="text-white">{dataCom}</span>
           </p>
 
           <div>
             <h2 className="text-white font-bold text-xl mt-8">
-              Number of Repos - 20
+              Number of Repos - {dataRep}
             </h2>
             <h3 className="text-white font-bold text-xl mt-8">
-              Github Oauth Access Token - {receivedData.token}
+              Github Oauth Access Token - {receivedData?.token}
             </h3>
 
             <div className="flex flex-wrap h-[18rem]">
@@ -106,7 +160,7 @@ const router = useRouter();
         <div className="flex-[0.2] mt-8">
           <div>
             <div className="text-md py-2 w-[15rem] bg-gray-300 px-2 mb-2 rounded-md cursor-pointer">
-              Name - {receivedData.name}
+              Name - {receivedData?.name}
             </div>
             {/* <div className="text-md py-2 w-[15rem] bg-gray-300 px-2 mb-2 rounded-md cursor-pointer">
               Profile 
@@ -115,7 +169,7 @@ const router = useRouter();
               QR Code{" "}
             </div> */}
             <div className="text-md py-2 w-[15rem] bg-gray-300 px-2 mb-2 rounded-md cursor-pointer">
-              Experience - {receivedData.skillsets}
+              Experience - {receivedData?.skillsets}
             </div>
             <div className="text-md py-2 w-[15rem] bg-gray-300 px-2 mb-2 rounded-md cursor-pointer">
             <a href='/'>Sign Out</a> 

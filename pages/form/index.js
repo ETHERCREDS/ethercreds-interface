@@ -1,6 +1,8 @@
 import { useRouter } from "next/router";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { NftStorageHttpService } from "../api/nftStorage";
+import { gql } from "@apollo/client";
+import axios from "axios";
 
 const index = () => {
   const nameInputRef = useRef();
@@ -11,10 +13,14 @@ const index = () => {
   const linkedInInputRef = useRef();
   const githubInputRef = useRef();
   const [selectedFile, setSelectedFile] = useState();
+ 
   const nftStorageHttpService = new NftStorageHttpService();
 
   const router = useRouter();
   const { code } = router.query;
+
+
+
   
 
   const changeHandler = (event) => {
