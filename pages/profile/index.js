@@ -34,7 +34,7 @@ const index = () => {
           onClick={homepageHandler}
           className="bg-white/50 py-2 px-7 rounded-md"
         >
-          Explore
+          Deploy NFT
         </button>
         <button
           onClick={dashboardHandler}

@@ -9,9 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.8.8",
     "@pushprotocol/uiweb": "^0.2.3",
     "@rainbow-me/rainbowkit": "^0.8.0",
-    "axios": "^1.2.0",
+    "axios": "^1.6.2",
     "fs": "^0.0.1-security",
     "next": "13.0.6",
     "react": "18.2.0",
